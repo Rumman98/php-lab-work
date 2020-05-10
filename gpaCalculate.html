@@ -1,0 +1,77 @@
+<!--Problem: Develop a result calculator. Where user will input
+the course title, credit and obtained marks. The system will show
+individual result in gpa and also SGPA of that semester in a table.
+Formula: SGPA = Sum(credit*gpa)/total credit
+-->
+<html>
+	<head></head>
+	<body>
+		<h3> Enter Course One Information</h3><br/>
+		<label> Course Title</label>
+		<input type="text" id="course_title" /><br/>
+		<label> Course Credit</label>
+		<input type="number" id="course_credit"/><br/>
+		<label> Marks</label>
+		<input type="number" id="marks"/><br/>
+		
+		<h3> Enter Course Two Information</h3><br/>
+		<label> Course Title</label>
+		<input type="text" id="course2_title"/><br/>
+		<label> Course Credit</label>
+		<input type="number" id="course2_credit"/><br/>
+		<label> Marks</label>
+		<input type="number" id="marks2"/><br/>
+		
+		<input type="button" onclick="calculator()" value="Calculate"/><br/>
+		<br/>
+		<span id="result"></span>
+		<script type="text/javascript">
+			function calculator(){
+				var course_title = document.getElementById("course_title").value;
+				var course_credit = document.getElementById("course_credit").value;
+				var marks = document.getElementById("marks").value;
+				var gpa = cpaIdentify(marks);
+				var course2_title = document.getElementById("course2_title").value;
+				var course2_credit = document.getElementById("course2_credit").value;
+				var marks2 = document.getElementById("marks2").value;
+				var gpa2 = cpaIdentify(marks2);
+				
+				var sum_course = ((course_credit*gpa)+(course2_credit*gpa2));
+				var total_credit = parseFloat(course_credit)+parseFloat(course2_credit);
+				var sgpa =sum_course/total_credit;
+				sgpa = sgpa.toFixed(2);
+				
+				document.getElementById('result').innerHTML = "<table border=1><tr><th>Course Title</th><th>Course Credit</th><th>GPA</th></tr><tr><td>"+course_title+"</td><td>"+course_credit+"</td><td>"+gpa+"</td></tr><tr><td>"+course2_title+"</td><td>"+course2_credit+"</td><td>"+gpa2+"</td></tr><tr><td colspan='2'>Total SGPA:</td><td>"+sgpa+"</td></tr></table>";
+				
+			}
+			
+			function cpaIdentify(marks){
+				var gpa = 0;
+				if(marks<40){
+					gpa = 0.00;
+				}else if(marks>39 && marks<45){
+					gpa = 2.00;
+				}else if(marks>44 && marks<50){
+					gpa = 2.25;
+				}else if(marks>49 && marks<55){
+					gpa = 2.50;
+				}else if(marks>54 && marks<60){
+					gpa = 2.75;
+				}else if(marks>59 && marks<65){
+					gpa = 3.00;
+				}else if(marks>64 && marks<70){
+					gpa = 3.25;
+				}else if(marks>69 && marks<75){
+					gpa = 3.50;
+				}else if(marks>74 && marks<80){
+					gpa = 3.75;
+				}else if(marks>79){
+					gpa = 4.00;
+				}
+			  return gpa;
+			}
+		
+		</script>
+	</body>
+
+</html>
